@@ -33,4 +33,4 @@ stages:
               deploymentMode: Complete
               resourceGroupName: Multi
               templateLocation: Linked artifact    
-              csmFile: $(Build.ArtifactStagingDirectory)/ARMTemplates)          
+              csmFile: $(System.DefaultWorkingDirectory)/ARMTemplates/azuredeploy.json   
