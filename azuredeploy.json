@@ -24,7 +24,7 @@
     }
   },
   "variables": {
-    "storageAccountName": "teststorage1"
+    "storageAccountName": "aidansextremelyawesomestorage"
   },
   "resources": [
     {
