@@ -2,7 +2,6 @@ trigger:
   - master
 
 stages:
-
   - stage: Deploy
     displayName: Deploy ARM template
     jobs:
