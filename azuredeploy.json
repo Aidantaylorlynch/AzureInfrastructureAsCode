@@ -37,6 +37,7 @@
       },
       "kind": "StorageV2",
       "properties": {
+        "mode": "Complete",
         "encryption": {
           "services": {
             "blob": {
