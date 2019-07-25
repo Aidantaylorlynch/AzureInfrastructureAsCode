@@ -8,7 +8,7 @@ stages:
      - job: Publish
        displayName: Publish
        pool:
-        vmImage: 'ubuntu-16.04'
+        vmImage: 'windows-2019'
        steps:
          - task: PublishBuildArtifacts@1
            inputs:
@@ -23,7 +23,7 @@ stages:
       - job: Deploy
         displayName: Deploy
         pool:
-          vmImage: 'ubuntu-16.04'
+          vmImage: 'windows-2019'
         steps:
           - task: AzureResourceGroupDeployment@2
             inputs:
