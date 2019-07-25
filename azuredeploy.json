@@ -24,12 +24,34 @@
     }
   },
   "variables": {
-    "storageAccountName": "aidantaylorlynch"
   },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('storageAccountName')]",
+      "name": "aidantaylorlynch",
+      "location": "[parameters('location')]",
+      "apiVersion": "2018-07-01",
+      "sku": {
+        "name": "[parameters('storageAccountType')]"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "encryption": {
+          "services": {
+            "blob": {
+              "enabled": true
+            },
+            "file": {
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "aidantaylorlynch2",
       "location": "[parameters('location')]",
       "apiVersion": "2018-07-01",
       "sku": {
