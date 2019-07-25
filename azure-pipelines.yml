@@ -2,20 +2,6 @@ trigger:
   - master
 
 stages:
-  - stage: Publish
-    displayName: Publish ARM template to staging
-    jobs:
-     - job: Publish
-       displayName: Publish
-       pool:
-        vmImage: 'windows-2019'
-       steps:
-         - task: PublishBuildArtifacts@1
-           inputs:
-             PathtoPublish: $(Build.SourcesDirectory)/ARMTemplates
-             publishLocation: FilePath
-             TargetPath: $(Build.ArtifactStagingDirectory)
-             ArtifactName: ARMTemplates
 
   - stage: Deploy
     displayName: Deploy ARM template
