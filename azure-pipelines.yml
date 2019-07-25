@@ -10,11 +10,10 @@ stages:
        pool:
         vmImage: 'ubuntu-16.04'
        steps:
-         - task: CopyFiles@2
+         - task: PublishBuildArtifacts@1
            inputs:
-             SourceFolder: $(Build.SourcesDirectory)/ARMTemplates
-             TargetFolder: $(Build.ArtifactStagingDirectory)
-             CleanTargetFolder: true
+             PathtoPublish: $(Build.SourcesDirectory)/ARMTemplates
+             ArtifactName: ARMTemplates
 
   - stage: Deploy
     displayName: Deploy ARM template
@@ -30,4 +29,5 @@ stages:
               action: Create Or Update Resource Group
               deploymentMode: Complete
               resourceGroupName: Multi
-              templateLocation: Linked artifact              
+              templateLocation: Linked artifact    
+              csmFile: $(Build.SourcesDirectory)/ARMTemplates/azuredeploy.json)          
