@@ -27,8 +27,7 @@ stages:
           - task: AzureResourceGroupDeployment@2
             inputs:
               azureSubscription: ARMServiceConnection
+              action: Create Or Update Resource Group
               deploymentMode: Complete
               resourceGroupName: Multi
-              templateLocation: Linked artifact
-              csmFile: $(Build.ArtifactStagingDirectory)/ARMTemplates/azuredeploy.json
-              
+              templateLocation: Linked artifact              
