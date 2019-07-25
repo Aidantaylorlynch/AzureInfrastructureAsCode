@@ -1,4 +1,4 @@
-#Infrastructure As Code & ARM Templates
+# **Infrastructure As Code & ARM Templates**
 ## Creating an Azure Git repository
 ## Creating a resource group
 ## Creating a service connection
