@@ -2,11 +2,11 @@ trigger:
   - master
 
 stages:
-  - stage: Copy
-    displayName: COPY ARM template to staging
+  - stage: Publish
+    displayName: Publish ARM template to staging
     jobs:
-     - job: Copy
-       displayName: COPY
+     - job: Publish
+       displayName: Publish
        pool:
         vmImage: 'ubuntu-16.04'
        steps:
@@ -30,4 +30,4 @@ stages:
               deploymentMode: Complete
               resourceGroupName: Multi
               templateLocation: Linked artifact    
-              csmFile: $(Build.SourcesDirectory)/ARMTemplates/azuredeploy.json)          
+              csmFile: $(Build.ArtifactStagingDirectory)/ARMTemplates/azuredeploy.json)          
