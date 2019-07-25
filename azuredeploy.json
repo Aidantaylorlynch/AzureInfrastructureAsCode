@@ -24,11 +24,13 @@
     }
   },
   "variables": {
+    "storageAccountName1": "aidantaylorlynch",
+    "storageAccountName2": "aidantaylorlynch2"
   },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "aidantaylorlynch",
+      "name": "[variables('storageAccountName1')]",
       "location": "[parameters('location')]",
       "apiVersion": "2018-07-01",
       "sku": {
@@ -51,7 +53,7 @@
     },
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "aidantaylorlynch2",
+      "name": "[variables('storageAccountName2')]",
       "location": "[parameters('location')]",
       "apiVersion": "2018-07-01",
       "sku": {
@@ -74,9 +76,13 @@
     }
   ],
   "outputs": {
-    "storageAccountName": {
+    "storageAccountName1": {
       "type": "string",
-      "value": "[variables('storageAccountName')]"
+      "value": "[variables('storageAccountName1')]"
+    },
+    "storageAccountName2": {
+      "type": "string",
+      "value": "[variables('storageAccountName2')]"
     }
   }
 }
