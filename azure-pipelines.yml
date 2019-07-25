@@ -26,7 +26,7 @@ stages:
         steps:
           - task: AzureResourceGroupDeployment@2
             inputs:
-              azureSubscription: yoloswaggins
+              azureSubscription: ARMServiceConnection
               deploymentMode: Complete
               resourceGroupName: Multi
               templateLocation: Linked artifact

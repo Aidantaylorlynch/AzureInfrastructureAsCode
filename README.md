@@ -1,6 +1,7 @@
 # ARM templates & Infrastructure as code
-## Creating a resource group
 ## Creating an Azure Git repository
+## Creating a resource group
+## Creating a service connection
 ## Creating a release pipeline
 ### Deployment modes
 When setting up a release pipeline to use the ```Azure resource group deployment``` task, you have to the option to specify the deployment mode.
