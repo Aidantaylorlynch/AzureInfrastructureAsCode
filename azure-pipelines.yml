@@ -1,0 +1,29 @@
+trigger: master
+
+stages:
+  - stage: Copy ARM template to staging
+    jobs:
+     - job: Copy
+       pool:
+        vmImage: 'ubuntu-16.04'
+       steps:
+         - task: CopyFiles@2
+           inputs:
+             SourceFolder: $(Build.SourcesDirectory)/ARMTemplates
+             TargetFolder: $(Build.ArtifactStagingDirectory)
+             CleanTargetFolder: true
+
+  - stage: Deploy ARM template
+    jobs:
+      - job: Deploy
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: AzureResourceGroupDeployment@2
+            inputs:
+              azureSubscription: yoloswaggins
+              deploymentMode: Complete
+              resourceGroupName: Multi
+              templateLocation: Linked artifact
+              csmFile: $(Build.ArtifactStagingDirectory)/ARMTemplates/azuredeploy.json
+              
