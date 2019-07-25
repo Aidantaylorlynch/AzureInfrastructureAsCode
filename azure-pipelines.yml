@@ -25,6 +25,7 @@ stages:
         pool:
           vmImage: 'windows-2019'
         steps:
+          - script: dir
           - task: AzureResourceGroupDeployment@2
             inputs:
               azureSubscription: ARMServiceConnection
