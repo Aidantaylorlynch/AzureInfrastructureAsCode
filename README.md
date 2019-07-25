@@ -3,6 +3,7 @@
 ## Creating a resource group
 ## Creating a service connection
 ## Creating a release pipeline
+### System.DefaultWorkingDirectory The local path on the agent where your source code files are downloaded. For example: c:\agent\_work\1\s
 ### Deployment modes
 When setting up a release pipeline to use the ```Azure resource group deployment``` task, you have to the option to specify the deployment mode.
 
