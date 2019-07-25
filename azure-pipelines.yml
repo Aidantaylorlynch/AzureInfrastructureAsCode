@@ -13,6 +13,8 @@ stages:
          - task: PublishBuildArtifacts@1
            inputs:
              PathtoPublish: $(Build.SourcesDirectory)/ARMTemplates
+             publishLocation: FilePath
+             TargetPath: $(Build.ArtifactStagingDirectory)
              ArtifactName: ARMTemplates
 
   - stage: Deploy
