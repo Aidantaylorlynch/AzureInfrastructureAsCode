@@ -36,7 +36,7 @@ az account list-locations
 - Give the service connection a name: ```ARMServiceConnection```.
 - Click OK. This service connection can now be used in our pipeline.  
 
-NOTE: Service connections are also needed whenever you add external [resources](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops) to your pipeline after the ***first deployment***. For example adding a new ```vmImage``` to the pipeline would require creating a new service connection **or** explicitly authorizing the resource using the classic Azure editor within the pipelines section of Azure Devops.
+***NOTE:*** Service connections are also needed whenever you add external [resources](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/resources?view=azure-devops) to your pipeline after the ***first deployment***. For example adding a new ```vmImage``` to the pipeline would require creating a new service connection **or** explicitly authorizing the resource using the classic Azure editor within the pipelines section of Azure Devops.
 
 
 ## Creating a release pipeline
@@ -49,7 +49,7 @@ NOTE: Service connections are also needed whenever you add external [resources](
 trigger:
     - master
 ~~~~
-- In order to deploy and ARM template with the ```Azure resource group deployment``` task, we only need to run 1 task: ```AzureResourceGroupDeployment@2```. Like so: (NOTE: this azure-pipelines.yml can be condensed into a more implicit form without stages or jobs, however I like being explicit where possible).
+- In order to deploy and ARM template with the ```Azure resource group deployment``` task, we only need to run 1 task: ```AzureResourceGroupDeployment@2```. Like so: (***NOTE:*** this azure-pipelines.yml can be condensed into a more implicit form without stages or jobs, however I like being explicit where possible).
 
 ~~~~
 trigger:
@@ -81,3 +81,47 @@ stages:
 When setting up a release pipeline to use the ```Azure resource group deployment``` task, you have to the option to specify the deployment mode.
 - ***Incremental update (DEFAULT):*** Azure Resource Manager only makes changes to existing resources if they are specified in the ARM template. Pre-existing resources that are not referenced in the ARM template are left alone.  
 - ***Complete update:*** Azure Resource Manager will delete all resources within a resource group that are not referenced in the ARM template. Essentially, the ARM template will reflect the current state of all the resources within a resource group.
+
+## Create an Azure Resource Manager Template (ARM Template)
+Now that we have a pipeline definition, we need to create an ARM template to be able to provision some infrastructure. We will be deploying a storage account, but there are Lots of templates available for random scenarios [here](https://azure.microsoft.com/en-au/resources/templates/).
+
+#### azuredeploy.json
+- First create a new directory ```ARMTemplates``` that will store the ARM template.
+- Create a new file called azuredeploy.json.
+- Add the basic [structure](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-authoring-templates) of a template:
+~~~~
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "",
+  "resources": [  ],
+}
+~~~~
+- To see how to provision a new storage account with this template, open up a link to the [Microsoft reference material](https://docs.microsoft.com/en-au/azure/templates/).
+- Using the tree list on the left-side of the page, navigate to ***Storage*** > ***{latest-date}*** > ***Storage Accounts*** > ***Storage Account***.
+- Copy over the properties that are required/any others you want to use:
+~~~~
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "",
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "myNewStorageAccount",
+      "location": "australiasoutheast",
+      "apiVersion": "2019-04-01",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "StorageV2",
+      "properties": {}
+    }
+  ],
+}
+~~~~
+- This is the bare minimum configuration required for a storage account. You can use these [docs](https://docs.microsoft.com/en-au/azure/templates/microsoft.storage/2019-04-01/storageaccounts) to see what else is possible.
+- Now that we have our template defined, and referenced in our **azure-pipelines.yml** we can commit and push to our repo to trigger the build and deployment.
+- ***NOTE:*** The storage account must be unique, so make sure you name it accordingly or the pipeline will fail.
+- Nagivate to the Azure Portal to see your deployments, or use this command to see all storage accounts:
+~~~~
+az storage account list
+~~~~
