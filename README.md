@@ -125,3 +125,4 @@ Now that we have a pipeline definition, we need to create an ARM template to be 
 ~~~~
 az storage account list
 ~~~~
+- You should see your storage account listed under the resource group for that you created the service connection under.
