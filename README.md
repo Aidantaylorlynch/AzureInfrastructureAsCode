@@ -106,7 +106,7 @@ Now that we have a pipeline definition, we need to create an ARM template to be 
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "myNewStorageAccount",
+      "name": "yoloswagginsstorage",
       "location": "australiasoutheast",
       "apiVersion": "2019-04-01",
       "sku": {

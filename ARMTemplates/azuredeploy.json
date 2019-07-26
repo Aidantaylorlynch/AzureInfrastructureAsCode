@@ -4,7 +4,7 @@
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "myNewStorageAccount",
+      "name": "yoloswagginsstorage",
       "location": "australiasoutheast",
       "apiVersion": "2019-04-01",
       "sku": {
